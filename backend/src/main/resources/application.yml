@@ -57,3 +57,14 @@ cors:
 deployment:
   environment: ${DEPLOYMENT_ENVIRONMENT:local}
   expose-vulnerable-lab: ${DEPLOYMENT_EXPOSE_VULNERABLE_LAB:false}
+
+lab:
+  safety:
+    warning-banner-required: ${LAB_WARNING_BANNER_REQUIRED:true}
+    access-restriction-required: ${LAB_ACCESS_RESTRICTION_REQUIRED:true}
+    basic-auth-recommended: ${LAB_BASIC_AUTH_RECOMMENDED:true}
+    ip-allowlist-recommended: ${LAB_IP_ALLOWLIST_RECOMMENDED:true}
+    vpn-recommended: ${LAB_VPN_RECOMMENDED:true}
+    noindex-required: ${LAB_NOINDEX_REQUIRED:true}
+    robots-disallow-required: ${LAB_ROBOTS_DISALLOW_REQUIRED:true}
+    legal-warning: ${LAB_LEGAL_WARNING:This intentionally vulnerable lab is for authorized owner-controlled training only.}

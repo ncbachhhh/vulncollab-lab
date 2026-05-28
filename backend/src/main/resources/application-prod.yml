@@ -7,6 +7,13 @@ deployment:
   environment: prod
   expose-vulnerable-lab: false
 
+lab:
+  safety:
+    warning-banner-required: false
+    access-restriction-required: true
+    noindex-required: true
+    robots-disallow-required: true
+
 spring:
   jpa:
     show-sql: false
