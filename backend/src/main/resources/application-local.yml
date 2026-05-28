@@ -5,6 +5,10 @@ deployment:
   environment: local
   expose-vulnerable-lab: false
 
+lab:
+  safety:
+    access-restriction-required: false
+
 spring:
   jpa:
     show-sql: true
