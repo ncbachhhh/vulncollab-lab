@@ -7,6 +7,10 @@ deployment:
   environment: prod
   expose-vulnerable-lab: false
 
+security:
+  jwt:
+    secret: ${JWT_SECRET}
+
 lab:
   safety:
     warning-banner-required: false

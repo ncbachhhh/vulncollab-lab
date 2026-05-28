@@ -1,7 +1,9 @@
 package com.vulncollab;
 
+import com.vulncollab.user.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
 @SpringBootTest(properties = {
 		"spring.autoconfigure.exclude=org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration,"
@@ -9,6 +11,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 				+ "org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration"
 })
 class BackendApplicationTests {
+	@MockBean
+	private UserRepository userRepository;
 
 	@Test
 	void contextLoads() {
