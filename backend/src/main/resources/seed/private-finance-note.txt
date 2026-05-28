@@ -1,0 +1,4 @@
+Finance Internal seed note.
+
+This is fake lab data used for access-control and path traversal exercises.
+Do not put real financial data in this repository.

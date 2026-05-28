@@ -1,0 +1,12 @@
+app:
+  vulnerable-mode: false
+  lab-warning-enabled: false
+  secure-mode-banner-enabled: true
+
+deployment:
+  environment: prod
+  expose-vulnerable-lab: false
+
+spring:
+  jpa:
+    show-sql: false

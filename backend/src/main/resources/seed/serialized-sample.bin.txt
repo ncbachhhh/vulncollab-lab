@@ -1,0 +1,3 @@
+Placeholder for the future serialized-sample.bin fixture.
+
+The actual binary fixture should be generated when the controlled Java deserialization lab is implemented.

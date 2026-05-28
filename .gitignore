@@ -1,0 +1,40 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Env
+.env
+.env.local
+.env.*.local
+
+# Java / Maven
+backend/target/
+backend/.mvn/wrapper/maven-wrapper.jar
+*.class
+
+# IntelliJ
+.idea/
+*.iml
+
+# Node / React
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+
+# Logs
+*.log
+logs/
+
+# Docker / uploads
+uploads/
+backend/uploads/
+
+# Temporary
+tmp/
+temp/
+
+# Secrets / backups
+*.bak
+*.backup
+*.key
+*.pem

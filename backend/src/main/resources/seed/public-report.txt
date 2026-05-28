@@ -1,0 +1,3 @@
+VulnCollab public engineering report.
+
+This file is harmless seed data for local lab development.

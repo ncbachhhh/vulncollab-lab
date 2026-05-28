@@ -1,0 +1,10 @@
+app:
+  vulnerable-mode: true
+
+deployment:
+  environment: local
+  expose-vulnerable-lab: false
+
+spring:
+  jpa:
+    show-sql: true

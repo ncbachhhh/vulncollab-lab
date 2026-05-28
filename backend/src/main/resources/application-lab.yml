@@ -1,0 +1,11 @@
+app:
+  vulnerable-mode: true
+  lab-warning-enabled: true
+
+deployment:
+  environment: lab
+  expose-vulnerable-lab: false
+
+spring:
+  jpa:
+    show-sql: false
