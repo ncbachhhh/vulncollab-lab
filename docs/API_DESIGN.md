@@ -160,7 +160,62 @@ Logout accepts the current refresh token and revokes it:
 
 Frontend storage assumption for the initial React build: keep the access token in memory when possible and persist the refresh token only if the UX needs session restore across page reloads. If persistence is used, treat the refresh token as sensitive client-side state and clear it on logout, failed refresh, and account switch. Do not trust any client-side token state without server verification.
 
-## Current Day 5 Contract
+## Workspace Contract
+
+All workspace endpoints require `Authorization: Bearer <access-token>`.
+
+```http
+GET /api/workspaces
+POST /api/workspaces
+GET /api/workspaces/{publicId}
+PATCH /api/workspaces/{publicId}
+POST /api/workspaces/{publicId}/invite
+GET /api/workspaces/{publicId}/members
+```
+
+Workspace create/update body:
+
+```json
+{
+  "name": "Partner Launch",
+  "description": "Cross-team launch planning",
+  "visibility": "PRIVATE"
+}
+```
+
+Workspace response:
+
+```json
+{
+  "publicId": "wks-public-engineering-000000000001",
+  "name": "Public Engineering",
+  "description": "Shared engineering workspace for product delivery.",
+  "visibility": "PUBLIC",
+  "ownerPublicId": "22222222-2222-4222-8222-222222222222",
+  "currentUserRole": "OWNER",
+  "createdAt": "2026-05-29T10:00:00Z",
+  "updatedAt": "2026-05-29T10:00:00Z"
+}
+```
+
+Invite body:
+
+```json
+{
+  "email": "charlie@test.com",
+  "role": "VIEWER"
+}
+```
+
+Rules:
+
+- Workspace list returns only workspaces where the current user is a member.
+- Workspace detail also requires membership.
+- Update, invite, and member list require `OWNER`.
+- Inviting another `OWNER` is blocked for now; ownership transfer should be a separate explicit feature later.
+- Missing membership on a private workspace returns `WORKSPACE_NOT_FOUND` so the API does not confirm private workspace existence.
+
+## Current Day 6 Contract
 
 Implemented foundation classes:
 
@@ -170,5 +225,6 @@ Implemented foundation classes:
 - `GlobalExceptionHandler`
 - Access-token auth with JWT
 - Refresh-token persistence, rotation, and logout
+- Workspace membership APIs with centralized owner/member checks
 
 Future APIs must use this response contract unless there is a clear infrastructure reason not to, such as health checks or file downloads.

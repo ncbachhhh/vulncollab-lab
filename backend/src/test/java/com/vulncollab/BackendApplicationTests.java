@@ -2,6 +2,8 @@ package com.vulncollab;
 
 import com.vulncollab.user.UserRepository;
 import com.vulncollab.auth.RefreshTokenRepository;
+import com.vulncollab.workspace.WorkspaceMemberRepository;
+import com.vulncollab.workspace.WorkspaceRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -17,6 +19,12 @@ class BackendApplicationTests {
 
 	@MockBean
 	private RefreshTokenRepository refreshTokenRepository;
+
+	@MockBean
+	private WorkspaceRepository workspaceRepository;
+
+	@MockBean
+	private WorkspaceMemberRepository workspaceMemberRepository;
 
 	@Test
 	void contextLoads() {
