@@ -117,7 +117,50 @@ Domain services should throw exceptions from `com.vulncollab.common.error`:
 
 `GlobalExceptionHandler` owns HTTP mapping and response shape. Controllers should not manually duplicate error JSON.
 
-## Current Day 2 Contract
+## Auth Contract
+
+```http
+POST /api/auth/register
+POST /api/auth/login
+POST /api/auth/refresh
+POST /api/auth/logout
+GET /api/auth/me
+```
+
+Login and registration return both a short-lived access token and a one-time refresh token:
+
+```json
+{
+  "success": true,
+  "data": {
+    "token": "access.jwt.value",
+    "expiresAt": "2026-05-29T11:00:00Z",
+    "refreshToken": "opaque-refresh-token",
+    "refreshExpiresAt": "2026-06-05T10:00:00Z",
+    "user": {
+      "publicId": "22222222-2222-4222-8222-222222222222",
+      "email": "alice@test.com",
+      "displayName": "Alice Nguyen",
+      "role": "USER"
+    }
+  },
+  "timestamp": "2026-05-29T10:00:00Z"
+}
+```
+
+Refresh tokens are opaque random values. The server stores only a SHA-256 digest in `refresh_tokens`, plus expiry, revocation time, created IP, and user agent. Refresh uses rotation: a successful `POST /api/auth/refresh` revokes the submitted refresh token and returns a new access token plus a new refresh token. Reusing an old, revoked, expired, blank, or unknown refresh token returns `401 INVALID_REFRESH_TOKEN`.
+
+Logout accepts the current refresh token and revokes it:
+
+```json
+{
+  "refreshToken": "opaque-refresh-token"
+}
+```
+
+Frontend storage assumption for the initial React build: keep the access token in memory when possible and persist the refresh token only if the UX needs session restore across page reloads. If persistence is used, treat the refresh token as sensitive client-side state and clear it on logout, failed refresh, and account switch. Do not trust any client-side token state without server verification.
+
+## Current Day 5 Contract
 
 Implemented foundation classes:
 
@@ -125,5 +168,7 @@ Implemented foundation classes:
 - `ApiError`
 - `HealthResponse`
 - `GlobalExceptionHandler`
+- Access-token auth with JWT
+- Refresh-token persistence, rotation, and logout
 
 Future APIs must use this response contract unless there is a clear infrastructure reason not to, such as health checks or file downloads.
